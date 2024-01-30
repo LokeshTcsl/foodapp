@@ -29,7 +29,9 @@ router = routers.DefaultRouter()
 router.register('items',ItemViewSet)
 
 urlpatterns = [
+
     path('',include(router.urls)),
+    
     path("admin/", admin.site.urls),
     path('food/',include('food.urls')),
     path('register/',user_views.register,name='register'),
