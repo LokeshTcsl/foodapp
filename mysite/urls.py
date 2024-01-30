@@ -22,7 +22,14 @@ from django.contrib.auth import views as authentication_views
 from django.conf import settings
 from django.conf.urls.static import static
 
+from rest_framework import routers
+from food.views import ItemViewSet
+
+router = routers.DefaultRouter()
+router.register('items',ItemViewSet)
+
 urlpatterns = [
+    path('',include(router.urls)),
     path("admin/", admin.site.urls),
     path('food/',include('food.urls')),
     path('register/',user_views.register,name='register'),

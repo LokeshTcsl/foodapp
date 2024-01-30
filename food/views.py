@@ -9,6 +9,9 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 
+from rest_framework import viewsets
+from .serializers import ItemSerializer
+
 # Create your views here.
 def index(request):
     item_list = Item.objects.all()
@@ -71,3 +74,8 @@ def delete_item(request,id):
         item.delete()
         return redirect('food:index')
     return render(request,'food/delete_item.html',{'item':item})
+
+
+class ItemViewSet(viewsets.ModelViewSet):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
